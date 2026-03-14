@@ -36,8 +36,12 @@ class FloatingShape {
         this.rot += this.rotVel;
 
         // Rebater nas bordas
-        if (this.x < 0 || this.x > width) this.velX *= -1;
-        if (this.y < 0 || this.y > height) this.velY *= -1;
+        if (this.x < 0 || this.x > width) {
+            this.velX *= -1;
+        }
+        if (this.y < 0 || this.y > height) {
+            this.velY *= -1;
+        }
     }
 
     display() {
@@ -49,9 +53,13 @@ class FloatingShape {
         translate(this.x, this.y);
         rotate(this.rot);
         
-        if (this.type === 0) rect(-this.size/2, -this.size/2, this.size, this.size);
-        else if (this.type === 1) triangle(0, -this.size/2, -this.size/2, this.size/2, this.size/2, this.size/2);
-        else ellipse(0, 0, this.size);
+        if (this.type === 0) {
+            rect(-this.size/2, -this.size/2, this.size, this.size);
+            
+        } else if (this.type === 1) {
+            triangle(0, -this.size/2, -this.size/2, this.size/2, this.size/2, this.size/2);
+        
+        } else ellipse(0, 0, this.size);
         
         pop();
     }
