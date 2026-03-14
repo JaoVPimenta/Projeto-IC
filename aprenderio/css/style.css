@@ -16,7 +16,7 @@ body {
     background-color: var(--bg-dark);
     color: var(--text-main);
     font-family: 'Chakra Petch', sans-serif;
-    overflow: hidden; /* Impede scroll na tela inicial */
+    overflow: hidden;
 }
 
 #canvas-container {
@@ -35,7 +35,6 @@ body {
     padding: 20px;
 }
 
-/* Título com Gradiente */
 .title-gradient {
     font-family: 'Russo One', sans-serif;
     font-size: clamp(3rem, 8vw, 6rem);
@@ -53,7 +52,6 @@ body {
     font-weight: bold;
 }
 
-/* Grid de Cards */
 .grid-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -62,7 +60,6 @@ body {
     max-width: 900px;
 }
 
-/* Estilização do Card */
 .card {
     position: relative;
     height: 180px;
@@ -91,7 +88,6 @@ body {
     background-position: center;
 }
 
-/* Backgrounds simulando as imagens do Figma */
 .logic-bg { background-image: url('../imgs/img-lg.jpg'); }
 .design-bg { background-image: url('../imgs/img-gv.jpg'); }
 
