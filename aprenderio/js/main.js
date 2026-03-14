@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (cardLogic) {
         cardLogic.addEventListener('click', () => {
-            // O caminho agora parte do index.html externo
             window.location.href = 'aprenderio/ovas/logica01/index.html';
         });
     }
