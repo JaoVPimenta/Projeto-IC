@@ -16,7 +16,7 @@ body {
     background-color: var(--bg-dark);
     color: var(--text-main);
     font-family: 'Chakra Petch', sans-serif;
-    overflow: hidden; /* Impede scroll na tela inicial */
+    overflow: hidden;
 }
 
 #canvas-container {
