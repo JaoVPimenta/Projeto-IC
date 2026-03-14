@@ -1,5 +1,3 @@
-
-/* alterar geral */
 :root {
     --bg-dark: #0f172a;
     --card-bg: rgba(30, 41, 59, 0.8);
@@ -8,7 +6,6 @@
     --text-main: #f1f5f9;
 }
 
-/* padrão pra todos */
 * {
     margin: 0;
     padding: 0;
@@ -19,19 +16,17 @@ body {
     background-color: var(--bg-dark);
     color: var(--text-main);
     font-family: 'Chakra Petch', sans-serif;
-    
+    overflow: hidden; /* Impede scroll na tela inicial */
 }
 
-/* animação no fundo */
-#container-fundo {
+#canvas-container {
     position: fixed;
     top: 0;
     left: 0;
     z-index: -1;
 }
 
-/* garante que tudo estará centralizado */
-.container-principal {
+.main-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,25 +35,25 @@ body {
     padding: 20px;
 }
 
-/* título */
-.titulo {
+/* Título com Gradiente */
+.title-gradient {
     font-family: 'Russo One', sans-serif;
     font-size: clamp(3rem, 8vw, 6rem);
-    background: linear-gradient(to right, #60a5fa, #a855f7, #f472b6); 
-    -webkit-background-clip: text;  /* deixa o texto colorido */
+    background: linear-gradient(to right, #60a5fa, #a855f7, #f472b6);
+    -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     letter-spacing: -2px;
 }
 
-.subtitulo {
+.subtitle {
     letter-spacing: 5px;
     color: #94a3b8;
     margin-bottom: 50px;
     font-weight: bold;
 }
 
-/* grid dos cards */
+/* Grid de Cards */
 .grid-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -67,30 +62,30 @@ body {
     max-width: 900px;
 }
 
+/* Estilização do Card */
 .card {
     position: relative;
     height: 180px;
-    background: var(--accent-blue);
+    background: var(--card-bg);
     border-radius: 20px;
     border: 2px solid #334155;
     overflow: hidden;
     cursor: pointer;
     transition: all 0.3s ease;
-    backdrop-filter: blur(10px); /* efeito embaçado */
+    backdrop-filter: blur(10px);
 }
 
-/* animação do card na interação com mouse */
 .card:hover {
     transform: translateY(-5px) scale(1.02);
     border-color: var(--accent-blue);
     box-shadow: 0 10px 30px rgba(96, 165, 250, 0.2);
 }
 
-.card-imagem {
+.card-image {
     position: absolute;
     width: 100%;
     height: 100%;
-    opacity: 0.7;
+    opacity: 0.4;
     transition: 0.5s;
     background-size: cover;
     background-position: center;
@@ -98,12 +93,11 @@ body {
 
 /* Backgrounds simulando as imagens do Figma */
 .logic-bg { background-image: url('../imgs/img-lg.jpg'); }
-.gv-bg { background-image: url('../imgs/img-gv.jpg'); }
+.design-bg { background-image: url('../imgs/img-gv.jpg'); }
 
-/* destaca o texto */
-.card:hover .card-imagem { opacity: 0.2; transform: scale(1.1); }
+.card:hover .card-image { opacity: 0.2; transform: scale(1.1); }
 
-.card-conteudo {
+.card-content {
     position: relative;
     padding: 25px;
     height: 100%;
@@ -112,7 +106,7 @@ body {
     justify-content: space-between;
 }
 
-.icone {
+.icon-box {
     align-self: flex-end;
     background: rgba(15, 23, 42, 0.6);
     padding: 10px;
@@ -120,16 +114,13 @@ body {
     font-size: 1.5rem;
 }
 
-.card-texto h3 {
+.card-text h3 {
     font-family: 'Russo One', sans-serif;
     font-size: 1.5rem;
     margin-bottom: 5px;
 }
 
-.card-texto p { 
-    color: #94a3b8;
-    font-size: 0.9rem; 
-}
+.card-text p { color: #94a3b8; font-size: 0.9rem; }
 
 .card-placeholder {
     grid-column: 1 / -1;
@@ -142,7 +133,6 @@ body {
     letter-spacing: 2px;
 }
 
-
 .lg-header {
     display: flex;
     justify-content: space-between;
@@ -151,7 +141,7 @@ body {
 }
 
 .lg-h1 {
-    font-family: 'Russo_One', sans-serif;
+    font-family: 'Russo_One' sans-serif;
     color: var(--accent-blue);
 }
 
@@ -159,10 +149,10 @@ body {
     height: auto;
     padding: 10px 20px;
     text-decoration: none;
-    color: #f1f5f9;
+    color: white;
 }
 
-.lg-placeholder {
+.lg-main {
     height: 400px;
     display: flex;
     align-items: center;

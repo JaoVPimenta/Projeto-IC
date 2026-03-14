@@ -1,21 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
-
-    const cardLogic = document.getElementById('card-logic')
-    const cardGV = document.getElementById('card-gv')
-    
-    
-    // interação com os módulos
+    const cardLogic = document.getElementById('card-logic');
+    const cardDesign = document.getElementById('card-design');
 
     if (cardLogic) {
-        
         cardLogic.addEventListener('click', () => {
-            window.location.href = 'ovas/logica01/index.html'
-        })
+            // O caminho agora parte do index.html externo
+            window.location.href = 'aprenderio/ovas/logica01/index.html';
+        });
     }
 
-    if (cardGV) {
-        cardGV.addEventListener('click', () => {
-            alert("Em breve!")
-        })
+    if (cardDesign) {
+        cardDesign.addEventListener('click', () => {
+            alert("Design Lab em breve!");
+        });
     }
-})
+});
