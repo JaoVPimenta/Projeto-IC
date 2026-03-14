@@ -4,14 +4,13 @@ function setup() {
     let canvas = createCanvas(windowWidth, windowHeight);
     canvas.parent('canvas-container');
     
-    // Cria 15 formas geométricas aleatórias
     for (let i = 0; i < 15; i++) {
         shapes.push(new FloatingShape());
     }
 }
 
 function draw() {
-    background(15, 23, 42); // slate-900 do Figma
+    background(15, 23, 42);
     
     for (let s of shapes) {
         s.update();
@@ -24,7 +23,7 @@ class FloatingShape {
         this.x = random(width);
         this.y = random(height);
         this.size = random(40, 100);
-        this.type = floor(random(3)); // 0: Quadrado, 1: Triângulo, 2: Círculo
+        this.type = floor(random(3)); // 0: quadrado, 1: triângulo, 2: círculo
         this.velX = random(-0.5, 0.5);
         this.velY = random(-0.5, 0.5);
         this.rot = random(TWO_PI);
@@ -43,7 +42,7 @@ class FloatingShape {
 
     display() {
         noFill();
-        stroke(51, 65, 85, 100); // Slate-700 com transparência
+        stroke(51, 65, 85, 100);
         strokeWeight(1);
         
         push();
