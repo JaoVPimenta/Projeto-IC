@@ -1,7 +1,3 @@
-Com certeza! Aqui está o conteúdo formatado em um único bloco de código para facilitar o **copiar e colar**.
-
-Basta clicar no botão de "copiar" no canto do bloco e substituir todo o conteúdo do seu arquivo `README.md`.
-
 ```markdown
 # Aprender.IO - Objeto Virtual de Aprendizagem (OVA)
 
