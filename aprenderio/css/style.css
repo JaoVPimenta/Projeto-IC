@@ -4,6 +4,11 @@
     --accent-blue: #60a5fa;
     --accent-pink: #f472b6;
     --text-main: #f1f5f9;
+
+    --verde-claro: #4ADE80;
+    --verde-if: #36a048;
+    --esmeralda: #10B981;
+
 }
 
 * {
@@ -12,11 +17,37 @@
     box-sizing: border-box;
 }
 
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: -1; /* Fica atrás do conteúdo */
+  opacity: 0.5;
+}
+
+/* canto superior esquerdo */
+body::before {
+  top: -100px;
+  left: -100px;
+  background: radial-gradient(circle, var(--verde-if), transparent);
+}
+
+/* canto inferior direito */
+body::after {
+  bottom: -100px;
+  right: -100px;
+  background: radial-gradient(circle, var(--verde-if), transparent);
+}
+
 body {
     background-color: var(--bg-dark);
     color: var(--text-main);
     font-family: 'Chakra Petch', sans-serif;
-    overflow: hidden;
+    /* overflow: hidden; */  /* impede o scroll */
 }
 
 #canvas-container {
@@ -38,7 +69,7 @@ body {
 .title-gradient {
     font-family: 'Russo One', sans-serif;
     font-size: clamp(3rem, 8vw, 6rem);
-    background: linear-gradient(to right, #60a5fa, #a855f7, #f472b6);
+    background: linear-gradient(to right, #4ADE80, #36a048, #10B981);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -74,8 +105,9 @@ body {
 
 .card:hover {
     transform: translateY(-5px) scale(1.02);
-    border-color: var(--accent-blue);
-    box-shadow: 0 10px 30px rgba(96, 165, 250, 0.2);
+    border-color: var(--verde-claro);
+    box-shadow: 0 10px 30px #2F9E41;
+    color: var(--verde-claro);
 }
 
 .card-image {
@@ -138,7 +170,7 @@ body {
 
 .lg-h1 {
     font-family: 'Russo_One' sans-serif;
-    color: var(--accent-blue);
+    color: var(--verde-claro);
 }
 
 .lg-a {
