@@ -2,7 +2,10 @@
 # Aprender.IO - Objeto Virtual de Aprendizagem (OVA)
 
 ## 📌 Descrição
-O **Aprender.IO** é um Objeto Virtual de Aprendizagem (OVA) desenvolvido como parte de um projeto de **Iniciação Científica (IC)** no **IFG - Campus Inhumas**. A plataforma foi concebida para ser um ecossistema educacional digital, focado em auxiliar o processo de ensino e aprendizagem de diversas disciplinas da grade curricular do instituto.
+O **Aprender.IO** é um Objeto Virtual de Aprendizagem (OVA) desenvolvido como parte de um projeto de 
+**Iniciação Científica (IC)** no **IFG - Campus Inhumas**. 
+A plataforma foi concebida para ser um ecossistema educacional digital, 
+focado em auxiliar o processo de ensino e aprendizagem de diversas disciplinas da grade curricular do instituto.
 
 ## 🎯 Objetivo
 O projeto visa combater dificuldades de aprendizagem através de uma interface interativa e acessível. 
