@@ -25,7 +25,6 @@ body::after {
   height: 300px;
   border-radius: 50%;
   filter: blur(80px);
-  z-index: 0; /* Fica atrás do conteúdo, mas acima do canvas */
   opacity: 0.8;
 }
 
@@ -34,6 +33,7 @@ body::before {
   top: -100px;
   left: -100px;
   background: radial-gradient(circle, var(--verde-if), transparent);
+  z-index: 0;
 }
 
 /* canto inferior direito */
@@ -41,6 +41,7 @@ body::after {
   bottom: -100px;
   right: -100px;
   background: radial-gradient(circle, var(--verde-if), transparent);
+  z-index: -1; /* fica atrás dos cards */
 }
 
 body {
