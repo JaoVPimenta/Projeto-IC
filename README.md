@@ -62,16 +62,15 @@ Basta abrir o arquivo `index.html` em qualquer navegador moderno.
 
 ## 💡 Exemplos de Uso
 
-Ao acessar a plataforma, o aluno encontrará o menu principal com os módulos disponíveis. Atualmente, ao selecionar o módulo de **Lógica de Programação**, o usuário terá acesso a trilhas de conhecimento e exercícios práticos voltados para o desenvolvimento do pensamento algorítmico.
+Ao acessar a plataforma, o aluno encontrará o menu principal com os módulos disponíveis. Ao selecionar o módulo de **Lógica de Programação**, o usuário terá acesso a trilhas de conhecimento e exercícios práticos voltados para o desenvolvimento do pensamento algorítmico.
 
 ## 📈 Possíveis Melhorias
 
 Como o projeto é modular, existem diversas frentes de expansão planejadas:
 
-* [ ] Implementação de novos módulos (Matemática, Redes, etc.).
+* [ ] Implementação de novos módulos.
 * [ ] Sistema de gamificação para engajamento dos alunos.
 * [ ] Integração com banco de dados para salvar o progresso dos usuários.
-* [ ] Criação de uma área administrativa para professores inserirem conteúdos.
 
 ## 👨‍💻 Autor
 
