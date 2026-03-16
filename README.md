@@ -22,7 +22,7 @@ O projeto utiliza tecnologias web fundamentais para garantir leveza e compatibil
 ## 📂 Estrutura do Projeto
 A organização atual do repositório reflete a separação entre a estrutura de hospedagem e o núcleo da aplicação:
 
-```text
+text
 ├── aprenderio/         # Diretório principal da aplicação
 │   ├── css/            # Estilizações específicas
 │   ├── js/             # Scripts e lógica de funcionamento
