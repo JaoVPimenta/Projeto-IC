@@ -26,7 +26,7 @@ text
 ├── aprenderio/         # Diretório principal da aplicação
 │   ├── css/            # Estilizações específicas
 │   ├── js/             # Scripts e lógica de funcionamento
-│   └── assets/         # Imagens e recursos visuais
+│   └── imgs/           # Imagens e recursos visuais
 ├── index.html          # Ponto de entrada principal da interface
 └── README.md           # Documentação do projeto
 
