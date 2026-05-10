@@ -2,21 +2,46 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>LOGICA.IO</title>
-    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&family=Russo+One&display=swap" rel="stylesheet">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logic Quest - Mapa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;700&family=Russo+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
 </head>
-<body style="padding: 40px;">
+<body class="logic-body">
     
-    <header class="lg-header">
-        <h1 class="lg-h1">Logica.IO</h1>
-        
-        <a href="../../../index.html" class="card lg-a">VOLTAR</a>
+    <header class="logic-header">
+        <a href="../../../index.html" class="btn-icon">✖</a>
+        <div class="level-badge">🏆 Nível: <span id="level-text">1/16</span></div>
     </header>
 
-    <div class="card-placeholder lg-main" id="lg-placeholder">
-        [ ... ]
+    <main class="map-area">
+        <div class="map-container">
+            <img src="../../imgs/fundo_logic.io.png" alt="Mapa de Lógica" class="map-image">
+            
+            <div id="robot-marker" class="robot-marker">
+                <div class="robot-icon" id="robot-btn" title="Clique para o desafio!">
+                    🤖
+                    <div class="robot-ping"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="quiz-overlay" class="quiz-overlay" style="display: none;">
+        <div class="quiz-modal">
+            <div class="modal-glow"></div>
+            <div class="quiz-header">
+                <div class="quiz-title">
+                    <span class="icon-code">💻</span>
+                    <h3>DESAFIO</h3>
+                </div>
+                <button id="close-quiz" class="btn-close-modal">✖</button>
+            </div>
+            <p id="question-text" class="question-text"></p>
+            <div id="options-container" class="options-container"></div>
+        </div>
     </div>
+
+    <script src="../../js/logic.js"></script>
 </body>
 </html>

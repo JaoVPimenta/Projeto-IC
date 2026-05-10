@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    
     const cardLogic = document.getElementById('card-logic');
     const cardGV = document.getElementById('card-gv');
 
