@@ -105,8 +105,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentStep = 0;
     const robotMarker = document.getElementById('robot-marker');
-    const robotBtn = document.getElementById('robot-btn'); // robo
+    const robotBtn = document.getElementById('robot-btn');
     const quizOverlay = document.getElementById('quiz-overlay');
+
+    // NOVO: Elementos da Fala
+    const speechBubble = document.getElementById('robot-speech');
+    const speechTextElement = document.getElementById('speech-text');
+
+    // =========================================
+    // FUNÇÃO DA ANIMAÇÃO DE INTRODUÇÃO (FALA)
+    // =========================================
+    function startIntroAnimation() {
+        const message = "Olá, Recruta! Eu serei o seu guia nesta jornada pelo fascinante conhecimento dos Algoritmos. Clique em mim para começarmos!";
+        const typingSpeed = 50; // milissegundos por letra
+
+        // 1. Faz o balão aparecer com a animação CSS (classe .show)
+        setTimeout(() => {
+            speechBubble.classList.add('show');
+            // Inicia o efeito de digitação após o balão abrir
+            typeText(message, 0);
+        }, 500); // Meio segundo após abrir a página
+    }
+
+    // Função recursiva para o efeito de máquina de escrever
+    function typeText(text, index) {
+        if (index < text.length) {
+            // Adiciona a letra atual + o cursor piscante
+            speechTextElement.innerHTML = text.substring(0, index + 1) + '<span class="typed-cursor">|</span>';
+            
+            // Chama a si mesma para a próxima letra após o delay
+            setTimeout(() => {
+                typeText(text, index + 1);
+            }, 50); 
+        } else {
+            // Fim da digitação: Remove o cursor piscante
+            speechTextElement.innerHTML = text;
+            
+            // Agenda para o balão sumir após o usuário ter tempo de ler (8 segundos)
+            setTimeout(() => {
+                speechBubble.classList.remove('show');
+            }, 8000);
+        }
+    }
+
+    // --- Outras Funções (updateMap e openQuiz permanecem quase iguais) ---
 
     function updateMap() {
         const pos = checkpoints[currentStep];
@@ -114,17 +156,19 @@ document.addEventListener('DOMContentLoaded', () => {
         robotMarker.style.top = `${pos.y}%`;
         document.getElementById('level-text').innerText = `${currentStep + 1}/${checkpoints.length}`;
         
-        // se chegou ao último checkpoint
         if (currentStep === checkpoints.length - 1) {
             robotBtn.innerHTML = '🏆<div class="robot-ping" style="background-color: #fbbf24;"></div>';
-            robotBtn.style.backgroundColor = '#fbbf24'; // muda a cor para dourado
+            robotBtn.style.backgroundColor = '#fbbf24';
             robotBtn.style.boxShadow = '0 5px 15px rgba(251, 191, 36, 0.6)';
-            robotBtn.onclick = null; // desativa o clique
+            robotBtn.onclick = null;
             robotBtn.style.cursor = 'default';
         }
     }
 
     function openQuiz() {
+        // NOVO: Se o usuário clicar no robô, o balão de intro deve sumir imediatamente
+        speechBubble.classList.remove('show');
+
         const q = logicQuestions[currentStep % logicQuestions.length];
         document.getElementById('question-text').innerText = q.question;
         const container = document.getElementById('options-container');
@@ -137,11 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.onclick = () => {
                 if (i === q.answer) {
                     btn.classList.add('correct');
-                    setTimeout(() => { 
-                        currentStep++; 
-                        updateMap(); 
-                        quizOverlay.style.display = 'none'; 
-                    }, 1000);
+                    setTimeout(() => { currentStep++; updateMap(); quizOverlay.style.display = 'none'; }, 1000);
                 } else {
                     btn.classList.add('wrong');
                 }
@@ -151,8 +191,12 @@ document.addEventListener('DOMContentLoaded', () => {
         quizOverlay.style.display = 'flex';
     }
 
-    // clicavel
+    // --- Inicialização ---
     robotBtn.onclick = openQuiz;
     document.getElementById('close-quiz').onclick = () => quizOverlay.style.display = 'none';
+    
     updateMap();
+    
+    // NOVO: Dispara a animação de intro
+    startIntroAnimation();
 });

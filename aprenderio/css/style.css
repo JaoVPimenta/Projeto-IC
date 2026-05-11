@@ -291,33 +291,36 @@ body {
 .map-area {
     flex: 1;
     display: flex;
-    align-items: center;
+    align-items: center; 
     justify-content: center;
-    padding: 80px 20px 20px;
-    overflow: hidden;
+    padding: 20px; /* Reduzi o padding para ganhar espaço */
+    padding-top: 140px;
+    margin-top: 60px; /* Espaço para o header fixo */
+    overflow: auto;
+    width: 100vw;
+    height: calc(100vh - 80px); /* Ocupa a altura total menos o header */
 }
 
 .map-container {
     position: relative;
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: 100%;
-    aspect-ratio: 16/9;
-    min-width: 800px;
-    background-color: black;
-    border-radius: 1.5rem;
+    width: 95vw; /* Ocupa 95% da largura da tela */
+    max-width: 1200px; 
+    
+    /* O SEGREDO: Mantém a proporção matemática */
+    aspect-ratio: 16 / 9; 
+    
+    margin: 0 auto;
+    background-color: #000;
+    overflow: auto;
     border: 4px solid #334155;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    overflow: hidden;
+    border-radius: 1.5rem;
 }
 
 .map-image {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    object-fit: fill;
-    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    /* 'contain' garante que a imagem inteira apareça sem cortes e sem esticar */
+    object-fit: contain; 
 }
 
 /* O Robô */
@@ -332,20 +335,82 @@ body {
 }
 
 .robot-icon {
-    width: 50px; height: 50px;
+    width: clamp(40px, 5vw, 60px); /* Tamanho responsivo */
+    height: clamp(40px, 5vw, 60px);
     background-color: var(--ifg-green);
     border-radius: 50%;
     border: 3px solid white;
     display: flex; justify-content: center; align-items: center;
     font-size: 1.5rem;
-    position: relative;
-    box-shadow: 0 5px 15px rgba(47, 158, 65, 0.6);
     cursor: pointer;
-    transition: transform 0.2s;
+    box-shadow: 0 5px 15px rgba(47, 158, 65, 0.6);
 }
 
 .robot-icon:hover {
     transform: scale(1.1);
+}
+
+/* =========================================
+   ANIMAÇÃO DE FALA DO ROBÔ (INTRO)
+   ========================================= */
+
+.speech-bubble {
+    position: absolute;
+    bottom: 70px; /* Fica acima do robô */
+    left: 50%;
+    transform: translateX(-50%) scale(0); /* Centraliza e inicia invisível/pequeno */
+    background: rgba(30, 41, 59, 0.9); /* Fundo escuro semi-transparente */
+    border: 2px solid var(--ifg-green);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 15px;
+    width: 250px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    z-index: 30;
+    backdrop-filter: blur(5px);
+    
+    /* Prepara as transições de opacidade e transformação */
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none; /* Não bloqueia cliques atrás dele */
+}
+
+/* Classe CSS que o JS vai adicionar para fazer o balão aparecer */
+.speech-bubble.show {
+    opacity: 1 !important;
+    transform: translateX(-50%) scale(1); /* Volta ao tamanho normal */
+}
+
+/* Texto dentro do balão */
+#speech-text {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* O cursor piscante do efeito de digitação */
+.typed-cursor {
+    opacity: 1;
+    animation: blink 0.7s infinite;
+    color: var(--ifg-green);
+    font-weight: bold;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Setinha do balão apontando para baixo */
+.bubble-arrow {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid var(--ifg-green);
 }
 
 /* =========================================
