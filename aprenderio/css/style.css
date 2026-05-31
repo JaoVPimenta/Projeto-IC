@@ -350,6 +350,42 @@ body {
     transform: scale(1.1);
 }
 
+
+/* Estilos específicos para a Introdução */
+.intro-modal {
+    border-color: #2F9E41;
+    text-align: center;
+}
+
+.robot-icon-mini {
+    font-size: 2rem;
+    background: var(--ifg-green);
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid white;
+}
+
+.intro-content {
+    min-height: 120px; /* Garante que o modal não mude de tamanho enquanto digita */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Reutilizando a animação de piscar para o cursor */
+.typed-cursor {
+    color: var(--ifg-green);
+    font-weight: bold;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+
 /* =========================================
    ANIMAÇÃO DE FALA DO ROBÔ (INTRO)
    ========================================= */
