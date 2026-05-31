@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Condicional (7-10)
         { x: 53.5, y: 58.0 }, { x: 60.0, y: 49.0 }, { x: 69.5, y: 42.5 }, { x: 63.5, y: 38.0 }, 
         // Repetitiva (11-12)
-        { x: 58.5, y: 34.0 }, { x: 64.0, y: 30.0 }, 
+        { x: 58.5, y: 34.0 }, { x: 64.5, y: 30.0 }, { x: 74.0, y: 27.5 },
         // Função (13-16)
         { x: 68.0, y: 23.0 }, { x: 61.5, y: 19.5 }, { x: 67.5, y: 13.5 }, { x: 73.0, y: 10.0 } // Adicionado checkpoint final
     ];

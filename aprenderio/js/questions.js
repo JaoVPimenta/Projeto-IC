@@ -16,7 +16,7 @@ const bancoDeQuestoes = {
         ],
         // Etapa 2 (Fácil)
         [
-            { question: "Qual operador matemático é usado no VisuAlg para obter o RESTO de uma divisão?", options: ["/", "*", "MOD", "-"], answer: 2 },
+            { question: "Qual operador matemático é usado no VisuAlg para obter o RESTO de uma divisão?", options: ["/", "*", "%", "-"], answer: 2 },
             { question: "Analise:\n a <- 5\n b <- 3\n escreval(a + b)\nO que aparece na tela?", options: ["a+b", "53", "8", "Erro"], answer: 2 },
             { question: "Qual palavra-chave é usada no VisuAlg para indicar o início da declaração de variáveis?", options: ["let", "var", "const", "variaveis"], answer: 1 },
             { question: "Qual é o operador de 'Atribuição' utilizado no VisuAlg para guardar um valor dentro de uma variável?", options: ["=", "==", "<-", "->"], answer: 2 },
