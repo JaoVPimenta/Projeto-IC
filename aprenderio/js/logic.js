@@ -43,11 +43,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // 17 Checkpoints para fechar a matemática (4 + 3 + 4 + 2 + 4)
     const checkpoints = [
         // Comandos Simples (0-3)
-        { x: 13.5, y: 89.5 }, { x: 24.5, y: 90.5 }, { x: 29.5, y: 83.5 }, { x: 25.5, y: 76.0 }, 
+        { x: 13.5, y: 89.5 }, { x: 23.5, y: 90.5 }, { x: 28.5, y: 83.5 }, { x: 25.5, y: 76.0 }, 
         // Sequência Lógica (4-6)
         { x: 33.5, y: 74.0 }, { x: 40.5, y: 78.5 }, { x: 46.5, y: 68.5 }, 
         // Condicional (7-10)
-        { x: 53.5, y: 58.0 }, { x: 60.0, y: 49.0 }, { x: 69.5, y: 42.5 }, { x: 63.5, y: 38.0 }, 
+        { x: 53.5, y: 58.0 }, { x: 60.0, y: 49.0 }, { x: 68.0, y: 42.5 }, { x: 63.5, y: 38.0 }, 
         // Repetitiva (11-12)
         { x: 58.5, y: 34.0 }, { x: 64.5, y: 30.0 }, { x: 74.0, y: 27.5 },
         // Função (13-16)
