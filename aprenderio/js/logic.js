@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     
     // DEFINIÇÃO DOS MÓDULOS DE CONHECIMENTO
-    // Relaciona a categoria do banco de questões aos passos (checkpoints) do mapa.
     const modules = [
         { 
             id: 'comandosSimples', 
@@ -40,21 +39,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
-    // 17 Checkpoints para fechar a matemática (4 + 3 + 4 + 2 + 4)
     const checkpoints = [
-        // Comandos Simples (0-3)
-        { x: 13.5, y: 89.5 }, { x: 23.5, y: 90.5 }, { x: 28.5, y: 83.5 }, { x: 25.5, y: 76.0 }, 
-        // Sequência Lógica (4-6)
-        { x: 33.5, y: 74.0 }, { x: 40.5, y: 78.5 }, { x: 46.5, y: 68.5 }, 
-        // Condicional (7-10)
-        { x: 53.5, y: 58.0 }, { x: 60.0, y: 49.0 }, { x: 68.0, y: 42.5 }, { x: 63.5, y: 38.0 }, 
-        // Repetitiva (11-12)
-        { x: 58.5, y: 34.0 }, { x: 64.5, y: 30.0 }, { x: 74.0, y: 27.5 },
-        // Função (13-16)
-        { x: 68.0, y: 23.0 }, { x: 61.5, y: 19.5 }, { x: 67.5, y: 13.5 }, { x: 73.0, y: 10.0 } // Adicionado checkpoint final
+        { x: 13.5, y: 89.5 }, 
+        { x: 23.5, y: 90.5 }, 
+        { x: 28.5, y: 83.5 }, 
+        { x: 25.5, y: 76.0 }, 
+        { x: 33.5, y: 74.0 }, 
+        { x: 40.5, y: 78.5 }, 
+        { x: 46.5, y: 68.5 }, 
+        { x: 53.5, y: 58.0 }, 
+        { x: 60.0, y: 49.0 }, 
+        { x: 68.0, y: 42.5 }, 
+        { x: 63.5, y: 38.0 }, 
+        { x: 58.5, y: 34.0 }, 
+        { x: 64.5, y: 30.0 }, 
+        { x: 74.0, y: 27.5 },
+        { x: 68.0, y: 23.0 }, 
+        { x: 61.5, y: 19.5 }, 
+        { x: 67.5, y: 13.5 }, 
+        { x: 73.0, y: 10.0 }
     ];
 
     let currentStep = 0;
+    let isGlobalIntro = true; 
     
     // Elementos da DOM
     const robotMarker = document.getElementById('robot-marker');
@@ -63,92 +70,178 @@ document.addEventListener('DOMContentLoaded', () => {
     const introOverlay = document.getElementById('intro-overlay');
     const introTextElement = document.getElementById('intro-text');
     const btnStartGame = document.getElementById('btn-start-game');
-    const introTitle = document.querySelector('.quiz-title h3');
+    const introTitle = document.getElementById('intro-title');
+    
+    // Elementos do Palco de Ação (Sprites)
+    const actionRobot = document.getElementById('action-robot');
+    const actionFeedback = document.getElementById('action-feedback');
+    const terminalContainer = document.getElementById('terminal-container');
 
-    // Identifica em qual módulo o jogador está baseado no passo atual
+    // Inicializa o Robô do Mapa com o Sprite Estático Inicial
+    robotBtn.classList.add('robot-map-preview');
+
+    // GERENCIADOR DE SPRITES DO PALCO (QUIZ)
+    const RobotController = {
+        setIdle: () => {
+            actionRobot.className = 'robot-sprite sprite-idle';
+            actionFeedback.innerText = "Analisando dados...";
+            actionFeedback.style.color = "#94a3b8";
+        },
+        setSuccess: () => {
+            actionRobot.className = 'robot-sprite sprite-success';
+            actionFeedback.innerText = "CÓDIGO COMPILADO COM SUCESSO!";
+            actionFeedback.style.color = "#4ADE80";
+        },
+        setFail: () => {
+            actionRobot.className = 'robot-sprite sprite-fail';
+            actionFeedback.innerText = "ERRO DE COMPILAÇÃO!";
+            actionFeedback.style.color = "#ef4444";
+        }
+    };
+
     function getCurrentModule() {
         return modules.find(mod => currentStep >= mod.startAt && currentStep <= mod.endAt);
     }
 
     // =========================================
-    // LÓGICA DA TELA DE INTRODUÇÃO (MÓDULOS)
+    // LÓGICA DO EFEITO DA INTRODUÇÃO (DIGITAÇÃO)
     // =========================================
+    function startTyping(text, onComplete) {
+        introTextElement.innerHTML = "";
+        let index = 0;
+        
+        function type() {
+            if (text.substring(index, index + 4) === "<br>") {
+                introTextElement.innerHTML += "<br>";
+                index += 4;
+                setTimeout(type, 40);
+                return;
+            }
+
+            if (index < text.length) {
+                const currentHTML = introTextElement.innerHTML.replace('<span class="typed-cursor">|</span>', '');
+                introTextElement.innerHTML = currentHTML + text.charAt(index) + '<span class="typed-cursor">|</span>';
+                index++;
+                setTimeout(type, 30);
+            } else {
+                const currentHTML = introTextElement.innerHTML.replace('<span class="typed-cursor">|</span>', '');
+                introTextElement.innerHTML = currentHTML;
+                if (onComplete) onComplete();
+            }
+        }
+        type();
+    }
+
+    function initGlobalIntro() {
+        introTitle.innerText = "INICIALIZANDO SISTEMA...";
+        introOverlay.style.display = "flex";
+        introOverlay.style.opacity = "1";
+        btnStartGame.style.opacity = "0";
+        
+        const globalIntroText = "Bem-vindo à Trilha dos Algoritmos, Recruta!<br><br>Eu sou o teu Robô Guia. O meu objetivo é ajudar-te a escalar esta montanha de conhecimento. Prepara-te para testar a tua lógica!";
+        
+        startTyping(globalIntroText, () => {
+            btnStartGame.innerText = "INICIAR JORNADA";
+            btnStartGame.style.opacity = "1";
+        });
+    }
+
+    btnStartGame.onclick = () => {
+        introOverlay.style.opacity = "0";
+        setTimeout(() => {
+            introOverlay.style.display = "none";
+            
+            if (isGlobalIntro) {
+                isGlobalIntro = false;
+                // Posiciona o robô pela primeira vez sem disparar animação de corrida longa
+                const pos = checkpoints[currentStep];
+                robotMarker.style.left = `${pos.x}%`;
+                robotMarker.style.top = `${pos.y}%`;
+                document.getElementById('level-text').innerText = `${currentStep + 1}/${checkpoints.length}`;
+                
+                // Abre a introdução específica do primeiro módulo
+                startIntroForModule(getCurrentModule());
+            }
+        }, 500);
+    };
+
     function startIntroForModule(module) {
         introOverlay.style.display = "flex";
         introOverlay.style.opacity = "1";
         btnStartGame.style.opacity = "0";
         introTitle.innerText = "NOVA HABILIDADE DESBLOQUEADA";
-        introTextElement.innerHTML = "";
         
-        typeIntroText(module.intro, 0);
-    }
-
-    function typeIntroText(text, index) {
-        // Ignorar tags HTML (como <br>) na digitação para não quebrar o layout
-        if (text.substring(index, index + 4) === "<br>") {
-            introTextElement.innerHTML += "<br>";
-            setTimeout(() => typeIntroText(text, index + 4), 40);
-            return;
-        }
-
-        if (index < text.length) {
-            // Usa o conteúdo limpo e adiciona o cursor visual no fim
-            const currentHTML = introTextElement.innerHTML.replace('<span class="typed-cursor">|</span>', '');
-            introTextElement.innerHTML = currentHTML + text.charAt(index) + '<span class="typed-cursor">|</span>';
-            setTimeout(() => typeIntroText(text, index + 1), 30);
-        } else {
-            const currentHTML = introTextElement.innerHTML.replace('<span class="typed-cursor">|</span>', '');
-            introTextElement.innerHTML = currentHTML;
+        startTyping(module.intro, () => {
+            btnStartGame.innerText = "ESTOU PRONTO!";
             btnStartGame.style.opacity = "1";
-        }
+        });
     }
-
-    btnStartGame.onclick = () => {
-        introOverlay.style.opacity = "0";
-        setTimeout(() => introOverlay.style.display = "none", 500);
-    };
 
     // =========================================
-    // ATUALIZAÇÃO DO MAPA
+    // MOVIMENTAÇÃO DINÂMICA DO ROBÔ NO MAPA
     // =========================================
     function updateMap(triggerIntro = false) {
         const pos = checkpoints[currentStep];
+        
+        // 1. Muda o sprite para Correndo (GIF) antes do início do movimento
+        robotBtn.classList.remove('robot-map-preview');
+        robotBtn.classList.add('robot-map-run');
+        
+        // 2. Dispara a transição de posicionamento lento definida no CSS
         robotMarker.style.left = `${pos.x}%`;
         robotMarker.style.top = `${pos.y}%`;
         document.getElementById('level-text').innerText = `${currentStep + 1}/${checkpoints.length}`;
         
-        const currentModule = getCurrentModule();
-
-        // Se o passo atual é exatamente o início de um novo módulo, dispara a introdução
-        if (triggerIntro && currentStep === currentModule.startAt) {
-            setTimeout(() => startIntroForModule(currentModule), 800); // Aguarda o robô andar antes de abrir a intro
-        }
+        // 3. Aguarda o término exato do percurso lento (2.5s) para voltar a ficar estático
+        setTimeout(() => {
+            robotBtn.classList.remove('robot-map-run');
+            robotBtn.classList.add('robot-map-preview');
+            
+            // Lógica de abertura do popup de novas fases após a chegada do robô
+            const currentModule = getCurrentModule();
+            if (triggerIntro && currentModule && currentStep === currentModule.startAt) {
+                startIntroForModule(currentModule);
+            }
+        }, 2500); 
         
-        // Fim de jogo
+        // Tratamento da linha de chegada / Vitória Máxima
         if (currentStep === checkpoints.length - 1) {
-            robotBtn.innerHTML = '🏆<div class="robot-ping" style="background-color: #fbbf24;"></div>';
-            robotBtn.style.backgroundColor = '#fbbf24';
-            robotBtn.onclick = null;
+            setTimeout(() => {
+                robotBtn.classList.remove('robot-map-preview', 'robot-map-run');
+                robotBtn.style.backgroundImage = "none";
+                robotBtn.innerHTML = '🏆';
+                robotBtn.style.fontSize = '2.2rem';
+                robotBtn.style.display = 'flex';
+                robotBtn.style.justifyContent = 'center';
+                robotBtn.style.alignItems = 'center';
+                robotBtn.onclick = null;
+            }, 2500);
         }
     }
 
     // =========================================
-    // LÓGICA DE SORTEIO E QUIZ
+    // GERENCIAMENTO DA INTERFACE DO QUIZ
     // =========================================
     function openQuiz() {
         const currentModule = getCurrentModule();
-        
-        // Em qual etapa DENTRO do módulo estamos? (0, 1, 2, 3...)
         const stepWithinModule = currentStep - currentModule.startAt;
-        
-        // Pega o array de questões específico desta etapa no banco de questões
         const stageQuestions = bancoDeQuestoes[currentModule.id][stepWithinModule];
-        
-        // Sorteia UMA questão aleatória das 5 (ou mais) disponíveis nesta etapa
         const randomQuizIndex = Math.floor(Math.random() * stageQuestions.length);
         const q = stageQuestions[randomQuizIndex];
 
+        // Reseta o palco lateral para a imagem de análise estática
+        RobotController.setIdle();
+
+        // Configuração estrutural do desafio
         document.getElementById('question-text').innerText = q.question;
+        
+        if (q.codigo) {
+            terminalContainer.innerText = q.codigo;
+            terminalContainer.style.display = "block";
+        } else {
+            terminalContainer.style.display = "none";
+        }
+
         const container = document.getElementById('options-container');
         container.innerHTML = '';
 
@@ -158,27 +251,28 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.innerHTML = `<div class="option-content"><span class="option-letter">${String.fromCharCode(65+i)}</span> <p>${opt}</p></div>`;
             
             btn.onclick = () => {
-                // Desativa todos os botões após a resposta
                 const allBtns = container.querySelectorAll('.quiz-option-btn');
-                allBtns.forEach(b => b.onclick = null);
+                allBtns.forEach(b => b.onclick = null); 
 
                 if (i === q.answer) {
-                    // ACERTOU
+                    // ACERTOU: Transforma o robô lateral no GIF animado robot-idle
                     btn.classList.add('correct');
+                    RobotController.setSuccess();
+                    
+                    // Delay para curtir a comemoração antes de fechar e andar no mapa
                     setTimeout(() => { 
                         currentStep++; 
-                        updateMap(true); // O 'true' verifica se desbloqueou um módulo novo
+                        updateMap(true); 
                         quizOverlay.style.display = 'none'; 
-                    }, 1200);
+                    }, 2000); 
                 } else {
-                    // ERROU: Punição! Volta para o início do módulo atual
+                    // ERROU: Ativa filtro de erro no robô lateral
                     btn.classList.add('wrong');
-                    
-                    // Destaca a correta para ele aprender
                     allBtns[q.answer].classList.add('correct'); 
+                    RobotController.setFail();
                     
                     setTimeout(() => { 
-                        alert(`Resposta incorreta. Você retornará ao início do módulo: ${currentModule.name}. Revise seus conceitos!`);
+                        alert(`Erro de execução! Retornarás ao início do módulo: ${currentModule.name}. Reavalia os teus conceitos!`);
                         currentStep = currentModule.startAt; 
                         updateMap(false); 
                         quizOverlay.style.display = 'none'; 
@@ -191,31 +285,9 @@ document.addEventListener('DOMContentLoaded', () => {
         quizOverlay.style.display = 'flex';
     }
 
-    // Inicialização
     robotBtn.onclick = openQuiz;
     document.getElementById('close-quiz').onclick = () => quizOverlay.style.display = 'none';
     
-    // Inicia o jogo na etapa 0 (dispara a intro inicial)
-    updateMap(true);
+    // Inicia o Estado Inicial do Robô Guia
+    initGlobalIntro();
 });
-
-
-//     const checkpoints = [
-//         { x: 13.5, y: 89.5 }, 
-//         { x: 24.5, y: 90.5 }, 
-//         { x: 29.5, y: 83.5 },
-//         { x: 25.5, y: 76.0 }, 
-//         { x: 33.5, y: 74.0 }, 
-//         { x: 40.5, y: 78.5 },
-//         { x: 46.5, y: 68.5 }, 
-//         { x: 53.5, y: 58.0 }, 
-//         { x: 60.0, y: 49.0 },
-//         { x: 69.5, y: 42.5 }, 
-//         { x: 63.5, y: 38.0 }, 
-//         { x: 58.5, y: 34.0 },
-//         { x: 64.5, y: 30.0 },
-//         { x: 74.0, y: 27.5 }, //
-//         { x: 68.0, y: 23.0 }, 
-//         { x: 61.5, y: 19.5 },
-//         { x: 67.5, y: 13.5 }
-//     ];

@@ -19,7 +19,7 @@
 
     <main class="map-area">
         <div class="map-container">
-            <img src="../../imgs/fundo3.png" alt="Mapa de Lógica" class="map-image">
+            <img src="../../imgs/fundo4.png" alt="Mapa de Lógica" class="map-image">
 
             <div id="robot-marker" class="robot-marker">
                 <div id="robot-speech" class="speech-bubble" style="opacity: 0;">
@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="robot-icon" id="robot-btn" title="Clique para o desafio!">
-                    🤖
+        
                     <div class="robot-ping"></div>
                 </div>
             </div>
@@ -38,21 +38,17 @@
     <div id="intro-overlay" class="quiz-overlay">
         <div class="quiz-modal intro-modal">
             <div class="modal-glow"></div>
-
-            <div class="quiz-header">
+            <div class="quiz-header" style="justify-content: center;">
                 <div class="quiz-title">
                     <div class="robot-icon-mini">🤖</div>
-                    <h3>SISTEMA INICIALIZADO</h3>
+                    <h3 id="intro-title">SISTEMA INICIALIZADO</h3>
                 </div>
             </div>
-
             <div class="intro-content">
                 <p id="intro-text" class="question-text"></p>
             </div>
-
             <div class="intro-footer">
-                <button id="btn-start-game" class="btn-desafio"
-                    style="width: 100%; opacity: 0; transition: opacity 0.5s;">
+                <button id="btn-start-game" class="btn-desafio" style="width: 100%; opacity: 0; transition: opacity 0.5s; margin-top: 20px; padding: 15px; font-size: 1.2rem; cursor: pointer; background: var(--ifg-green); color: white; border: none; border-radius: 10px; font-family: 'Russo One';">
                     ESTOU PRONTO!
                 </button>
             </div>
@@ -60,17 +56,32 @@
     </div>
 
     <div id="quiz-overlay" class="quiz-overlay" style="display: none;">
-        <div class="quiz-modal">
+        <div class="quiz-modal split-modal">
             <div class="modal-glow"></div>
-            <div class="quiz-header">
-                <div class="quiz-title">
-                    <span class="icon-code">💻</span>
-                    <h3>DESAFIO</h3>
+            
+            <div class="quiz-grid">
+                <div class="quiz-column-left">
+                    <div class="quiz-header">
+                        <div class="quiz-title">
+                            <span class="icon-code">💻</span>
+                            <h3>DESAFIO</h3>
+                        </div>
+                        <button id="close-quiz" class="btn-close-modal">✖</button>
+                    </div>
+                    <p id="question-text" class="question-text"></p>
+                    
+                    <div id="terminal-container" class="terminal-block" style="display: none;"></div>
+                    
+                    <div id="options-container" class="options-container"></div>
                 </div>
-                <button id="close-quiz" class="btn-close-modal">✖</button>
+
+                <div class="quiz-column-right">
+                    <div class="action-stage">
+                        <div id="action-robot" class="robot-sprite sprite-idle"></div>
+                        <p id="action-feedback" class="action-feedback">Aguardando comando...</p>
+                    </div>
+                </div>
             </div>
-            <p id="question-text" class="question-text"></p>
-            <div id="options-container" class="options-container"></div>
         </div>
     </div>
 

@@ -64,7 +64,7 @@ class RoboGuia {
   constructor() {
     this.x = fases[0].x;
     this.y = fases[0].y;
-    this.img = '🤖'; // Representação simples. Pode ser trocada por uma imagem depois.
+    this.img = ''; // Representação simples. Pode ser trocada por uma imagem depois.
   }
 
   apresentar(texto) {

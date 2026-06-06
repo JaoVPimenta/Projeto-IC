@@ -387,6 +387,182 @@ body {
 
 
 /* =========================================
+   ESTILOS DO TERMINAL DE CÓDIGO
+   ========================================= */
+.terminal-block {
+    background-color: #000000;
+    color: #4ADE80;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    margin-bottom: 20px;
+    white-space: pre-wrap; /* Mantém as quebras de linha (\n) do JS */
+    font-size: 1.1rem;
+    position: relative;
+    z-index: 10;
+    box-shadow: inset 0 0 10px rgba(74, 222, 128, 0.1);
+}
+
+/* =========================================
+   ESTILOS DA TELA DIVIDIDA (GAMIFICAÇÃO)
+   ========================================= */
+.split-modal {
+    max-width: 900px !important;
+    padding: 0 !important;
+}
+
+.quiz-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile padrão */
+}
+
+@media (min-width: 768px) {
+    .quiz-grid {
+        grid-template-columns: 3fr 2fr; /* PC: Esquerda maior que direita */
+        min-height: 450px;
+    }
+}
+
+.quiz-column-left {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.quiz-column-right {
+    background-color: rgba(15, 23, 42, 0.9);
+    border-left: 2px solid #334155;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+
+
+/* =========================================
+   SISTEMA DE SPRITES DO ROBÔ (MAPA DA MONTANHA)
+   ========================================= */
+.robot-marker {
+    position: absolute;
+    transform: translate(-50%, -80%);
+    /* Movimentação lenta e suave para simular o robô caminhando */
+    transition: all 2.5s ease-in-out; 
+    z-index: 20;
+}
+
+.robot-icon {
+    width: 65px;
+    height: 65px;
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent !important; /* Remove fundo verde */
+    border: none !important; /* Remove bordas antigas */
+    box-shadow: none !important;
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.6));
+    transition: transform 0.2s;
+}
+
+.robot-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Estado: Parado no Checkpoint */
+.robot-map-preview {
+    background-image: url('../imgs/robot-preview.png');
+}
+
+/* Estado: Avançando/Correndo entre Checkpoints */
+.robot-map-run {
+    background-image: url('../imgs/robot-run.gif');
+}
+
+/* =========================================
+   SISTEMA DE SPRITES DO ROBÔ (PALCO DO QUIZ)
+   ========================================= */
+.robot-sprite {
+    width: 150px;
+    height: 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none !important; /* Remove círculos ou molduras artificiais */
+    border-radius: 0 !important;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.5));
+}
+
+/* Estado Inicial/Analisando dentro do Desafio */
+.sprite-idle { 
+    background-image: url('../imgs/robot-preview.png'); 
+}
+
+/* Estado de Sucesso: Acertou a questão (Executa o GIF Animado) */
+.sprite-success { 
+    background-image: url('../imgs/robot-idle.gif');
+    transform: scale(1.12);
+}
+
+/* Estado de Erro: Estático com filtro de alerta vermelho */
+.sprite-fail { 
+    background-image: url('../imgs/robot-preview.png');
+    filter: grayscale(100%) sepia(100%) hue-rotate(-50deg) saturate(600%) drop-shadow(0 0 15px #ef4444);
+    transform: scale(0.9) rotate(12deg);
+}
+
+
+
+/* =========================================
+   PREPARAÇÃO PARA SPRITES DO ROBÔ
+   ========================================= */
+.action-stage {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Quando você tiver a imagem (spritesheet), basta trocar o background-image aqui.
+  Atualmente usa cores e emojis como placeholder.
+*/
+/* .robot-sprite {
+    width: 120px;
+    height: 120px;
+    background-size: cover;
+    background-position: center;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid #475569;
+}
+
+.sprite-idle { background-color: var(--ifg-green); }
+.sprite-idle::after { content: '🤖'; font-size: 4rem; }
+
+.sprite-success { background-color: #fbbf24; transform: scale(1.15) translateY(-10px); border-color: white;}
+.sprite-success::after { content: '🎉'; font-size: 4rem; }
+
+.sprite-fail { background-color: #ef4444; transform: scale(0.9) rotate(15deg); border-color: white;}
+.sprite-fail::after { content: '💥'; font-size: 4rem; }
+*/
+
+.action-feedback {
+    font-family: 'Russo One', sans-serif;
+    color: #94a3b8;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
    ANIMAÇÃO DE FALA DO ROBÔ (INTRO)
    ========================================= */
 
