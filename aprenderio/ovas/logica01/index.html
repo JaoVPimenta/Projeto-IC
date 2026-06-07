@@ -85,6 +85,32 @@
         </div>
     </div>
 
+    <div id="victory-overlay" class="quiz-overlay" style="display: none; z-index: 200;">
+        <div class="quiz-modal intro-modal" style="border-color: #fbbf24; box-shadow: 0 0 60px rgba(251, 191, 36, 0.4);">
+            <div class="modal-glow" style="background-color: rgba(251, 191, 36, 0.3);"></div>
+            
+            <div class="quiz-header" style="justify-content: center; margin-bottom: 10px;">
+                <h3 style="color: #fbbf24; font-size: 2.5rem; text-shadow: 0 0 15px rgba(251,191,36,0.6); font-family: 'Russo One', sans-serif;">
+                    🎉 MISSÃO CUMPRIDA! 🎉
+                </h3>
+            </div>
+            
+            <div class="victory-content" style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+                <div class="robot-victory-sprite"></div>
+                
+                <p class="question-text" style="font-size: 1.2rem; text-align: center; margin-bottom: 0;">
+                    Parabéns, Mestre da Lógica! Você escalou a montanha do conhecimento, compilou todos os desafios e o sistema está rodando 100% sem bugs graças a você!
+                </p>
+            </div>
+            
+            <div class="intro-footer">
+                <button onclick="location.reload()" class="btn-icon" style="width: 100%; border-radius: 10px; margin-top: 30px; padding: 15px; font-size: 1.2rem; font-family: 'Russo One'; background: #fbbf24; color: #0f172a; cursor: pointer; text-decoration: none;">
+                    JOGAR NOVAMENTE
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="../../js/questions.js"></script>
     <script src="../../js/logic.js"></script>
 </body>

@@ -205,17 +205,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2500); 
         
         // Tratamento da linha de chegada / Vitória Máxima
+        // Tratamento da linha de chegada / Vitória Máxima
         if (currentStep === checkpoints.length - 1) {
             setTimeout(() => {
-                robotBtn.classList.remove('robot-map-preview', 'robot-map-run');
-                robotBtn.style.backgroundImage = "none";
-                robotBtn.innerHTML = '🏆';
-                robotBtn.style.fontSize = '2.2rem';
-                robotBtn.style.display = 'flex';
-                robotBtn.style.justifyContent = 'center';
-                robotBtn.style.alignItems = 'center';
-                robotBtn.onclick = null;
-            }, 2500);
+                // Remove o gif de corrida e deixa o robô parado no topo
+                robotBtn.classList.remove('robot-map-run');
+                robotBtn.classList.add('robot-map-preview');
+                robotBtn.onclick = null; // Desativa novos cliques
+                
+                // Dispara a tela de vitória
+                const victoryOverlay = document.getElementById('victory-overlay');
+                victoryOverlay.style.opacity = "0";
+                victoryOverlay.style.display = 'flex';
+                
+                // Efeito suave de fade-in para a tela final
+                setTimeout(() => {
+                    victoryOverlay.style.transition = "opacity 0.8s ease";
+                    victoryOverlay.style.opacity = "1";
+                }, 100);
+
+            }, 2500); // Aguarda exatos 2.5s para ele terminar de andar até o topo
         }
     }
 
