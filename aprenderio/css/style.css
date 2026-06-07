@@ -294,7 +294,7 @@ body {
     align-items: center; 
     justify-content: center;
     padding: 20px; /* Reduzi o padding para ganhar espaço */
-    padding-top: 140px;
+    padding-top: 100px;
     margin-top: 60px; /* Espaço para o header fixo */
     overflow: auto;
     width: 100vw;
