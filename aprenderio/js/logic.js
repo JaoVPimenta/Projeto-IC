@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const introOverlay = document.getElementById('intro-overlay');
     const introTextElement = document.getElementById('intro-text');
     const btnStartGame = document.getElementById('btn-start-game');
-    const introTitle = document.getElementById('intro-title');
+    // const introTitle = document.getElementById('intro-title');
     
     // Elementos do Palco de Ação (Sprites)
     const actionRobot = document.getElementById('action-robot');
@@ -103,70 +103,52 @@ document.addEventListener('DOMContentLoaded', () => {
         return modules.find(mod => currentStep >= mod.startAt && currentStep <= mod.endAt);
     }
 
+    // Corrigindo a busca do título para pegar apenas o do modal de intro
+    const introTitle = introOverlay.querySelector('.quiz-title h3');
+
     // =========================================
-    // LÓGICA DO EFEITO DA INTRODUÇÃO (DIGITAÇÃO)
+    // LÓGICA DA TELA DE INTRODUÇÃO (MÓDULOS)
     // =========================================
-    function startTyping(text, onComplete) {
-        introTextElement.innerHTML = "";
-        let index = 0;
-        
-        function type() {
-            if (text.substring(index, index + 4) === "<br>") {
-                introTextElement.innerHTML += "<br>";
-                index += 4;
-                setTimeout(type, 40);
-                return;
-            }
-
-            if (index < text.length) {
-                const currentHTML = introTextElement.innerHTML.replace('<span class="typed-cursor">|</span>', '');
-                introTextElement.innerHTML = currentHTML + text.charAt(index) + '<span class="typed-cursor">|</span>';
-                index++;
-                setTimeout(type, 30);
-            } else {
-                const currentHTML = introTextElement.innerHTML.replace('<span class="typed-cursor">|</span>', '');
-                introTextElement.innerHTML = currentHTML;
-                if (onComplete) onComplete();
-            }
-        }
-        type();
-    }
-
-    // Inicia a Introdução Global (Estado Zero) ao carregar a página
-    function initGlobalIntro() {
-        introTitle.innerText = "INICIALIZANDO SISTEMA...";
-        introOverlay.style.display = "flex";
-        introOverlay.style.opacity = "1";
-        
-        // Esconde e desativa nativamente o botão
-        btnStartGame.style.opacity = "0";
-        btnStartGame.disabled = true;
-        
-        const globalIntroText = "Bem-vindo à Trilha dos Algoritmos, Recruta!<br><br>Eu sou o teu Robô Guia. O meu objetivo é ajudar-te a escalar esta montanha de conhecimento. Prepara-te para testar a tua lógica!";
-        
-        startTyping(globalIntroText, () => {
-            btnStartGame.innerText = "INICIAR JORNADA";
-            btnStartGame.style.opacity = "1";
-            btnStartGame.disabled = false; // LIBERA o clique nativo aqui!
-        });
-    }
-
-    // Inicia a introdução específica de cada novo módulo conquistado
     function startIntroForModule(module) {
         introOverlay.style.display = "flex";
         introOverlay.style.opacity = "1";
-        introTitle.innerText = "NOVA HABILIDADE DESBLOQUEADA";
         
-        // Esconde e desativa nativamente o botão para a nova fala
+        // Esconde e desativa o clique do botão enquanto digita
         btnStartGame.style.opacity = "0";
-        btnStartGame.disabled = true;
+        btnStartGame.style.pointerEvents = "none"; 
         
-        startTyping(module.intro, () => {
-            btnStartGame.innerText = "ESTOU PRONTO!";
-            btnStartGame.style.opacity = "1";
-            btnStartGame.disabled = false; // LIBERA o clique nativo aqui!
-        });
+        introTitle.innerText = "NOVA HABILIDADE DESBLOQUEADA";
+        introTextElement.innerHTML = "";
+        
+        typeIntroText(module.intro, 0);
     }
+
+    function typeIntroText(text, index) {
+        if (text.substring(index, index + 4) === "<br>") {
+            introTextElement.innerHTML += "<br>";
+            setTimeout(() => typeIntroText(text, index + 4), 40);
+            return;
+        }
+
+        if (index < text.length) {
+            const currentHTML = introTextElement.innerHTML.replace('<span class="typed-cursor">|</span>', '');
+            introTextElement.innerHTML = currentHTML + text.charAt(index) + '<span class="typed-cursor">|</span>';
+            setTimeout(() => typeIntroText(text, index + 1), 30);
+        } else {
+            const currentHTML = introTextElement.innerHTML.replace('<span class="typed-cursor">|</span>', '');
+            introTextElement.innerHTML = currentHTML;
+            
+            // Texto terminou! Mostra o botão e permite o clique
+            btnStartGame.style.opacity = "1";
+            btnStartGame.style.pointerEvents = "auto";
+        }
+    }
+
+    // Fecha o modal ao clicar no botão
+    btnStartGame.onclick = () => {
+        introOverlay.style.opacity = "0";
+        setTimeout(() => introOverlay.style.display = "none", 500);
+    };
 
     // =========================================
     // MOVIMENTAÇÃO DINÂMICA DO ROBÔ NO MAPA

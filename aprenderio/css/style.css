@@ -817,3 +817,39 @@ body {
     0%, 100% { transform: translateY(0) scale(1); }
     50% { transform: translateY(-15px) scale(1.05); }
 }
+
+
+/* =========================================
+   BOTÃO DE INICIAR JORNADA (MODAL)
+   ========================================= */
+#btn-start-game {
+    background-color: #2F9E41; /* Verde do IFG */
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(47, 158, 65, 0.4);
+    margin-top: 20px;
+    width: 100%;
+    
+    /* Prepara a animação de aparecer e o hover */
+    transition: all 0.3s ease;
+}
+
+#btn-start-game:hover {
+    background-color: #247c33;
+    transform: scale(1.02);
+}
+
+#btn-start-game:active {
+    transform: scale(0.95); /* Efeito de afundar ao clicar */
+}
+
+/* Garante que o brilho do modal não fique por cima do botão bloqueando o clique */
+.modal-glow {
+    pointer-events: none; 
+}
