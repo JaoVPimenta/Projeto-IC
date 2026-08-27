@@ -629,52 +629,28 @@ body {
    MODAL DE QUIZ
    ========================================= */
 
-/* O fundo escuro que fica por trás do modal */
 .quiz-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(15, 23, 42, 0.9);
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(5px);
     z-index: 100;
-    
-    /* Centraliza o modal e dá uma margem segura nas bordas do celular */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 15px; 
-    box-sizing: border-box;
+    display: flex; justify-content: center; align-items: center;
+    padding: 20px;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
-/* A caixa do quiz em si */
 .quiz-modal {
-    background-color: #1E293B;
-    border: 2px solid var(--ifg-green);
+    background-color: #1e293b;
+    border: 3px solid #475569;
+    padding: 40px;
     border-radius: 1.5rem;
-    padding: 25px;
-    width: 100%;
-    max-width: 500px;
+    width: 100%; max-width: 600px;
     position: relative;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
-    
-    /* AS 3 LINHAS MÁGICAS PARA O CELULAR: */
-    max-height: 90vh; /* O modal nunca vai passar de 90% da altura da tela */
-    overflow-y: auto; /* Cria rolagem vertical apenas DENTRO do modal se precisar */
-    overscroll-behavior-y: contain; /* IMPEDE o celular de dar "Refresh" ao rolar aqui dentro */
-}
-
-/* Deixa o texto da pergunta um pouco menor no celular para caber melhor */
-@media (max-width: 600px) {
-    .question-text {
-        font-size: 1rem;
-        margin-bottom: 15px;
-    }
-    
-    .quiz-option-btn {
-        padding: 12px;
-        margin-bottom: 8px;
-    }
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    animation: modalPop 0.3s ease-out forwards;
 }
 
 @keyframes modalPop {
@@ -816,40 +792,4 @@ body {
 @keyframes floatVictory {
     0%, 100% { transform: translateY(0) scale(1); }
     50% { transform: translateY(-15px) scale(1.05); }
-}
-
-
-/* =========================================
-   BOTÃO DE INICIAR JORNADA (MODAL)
-   ========================================= */
-#btn-start-game {
-    background-color: #2F9E41; /* Verde do IFG */
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    font-family: 'Chakra Petch', sans-serif;
-    font-size: 1.2rem;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(47, 158, 65, 0.4);
-    margin-top: 20px;
-    width: 100%;
-    
-    /* Prepara a animação de aparecer e o hover */
-    transition: all 0.3s ease;
-}
-
-#btn-start-game:hover {
-    background-color: #247c33;
-    transform: scale(1.02);
-}
-
-#btn-start-game:active {
-    transform: scale(0.95); /* Efeito de afundar ao clicar */
-}
-
-/* Garante que o brilho do modal não fique por cima do botão bloqueando o clique */
-.modal-glow {
-    pointer-events: none; 
 }
