@@ -132,48 +132,39 @@ document.addEventListener('DOMContentLoaded', () => {
         type();
     }
 
+    // Inicia a Introdução Global (Estado Zero) ao carregar a página
     function initGlobalIntro() {
         introTitle.innerText = "INICIALIZANDO SISTEMA...";
         introOverlay.style.display = "flex";
         introOverlay.style.opacity = "1";
+        
+        // Esconde e desativa nativamente o botão
         btnStartGame.style.opacity = "0";
+        btnStartGame.disabled = true;
         
         const globalIntroText = "Bem-vindo à Trilha dos Algoritmos, Recruta!<br><br>Eu sou o teu Robô Guia. O meu objetivo é ajudar-te a escalar esta montanha de conhecimento. Prepara-te para testar a tua lógica!";
         
         startTyping(globalIntroText, () => {
             btnStartGame.innerText = "INICIAR JORNADA";
             btnStartGame.style.opacity = "1";
+            btnStartGame.disabled = false; // LIBERA o clique nativo aqui!
         });
     }
 
-    btnStartGame.onclick = () => {
-        introOverlay.style.opacity = "0";
-        setTimeout(() => {
-            introOverlay.style.display = "none";
-            
-            if (isGlobalIntro) {
-                isGlobalIntro = false;
-                // Posiciona o robô pela primeira vez sem disparar animação de corrida longa
-                const pos = checkpoints[currentStep];
-                robotMarker.style.left = `${pos.x}%`;
-                robotMarker.style.top = `${pos.y}%`;
-                document.getElementById('level-text').innerText = `${currentStep + 1}/${checkpoints.length}`;
-                
-                // Abre a introdução específica do primeiro módulo
-                startIntroForModule(getCurrentModule());
-            }
-        }, 500);
-    };
-
+    // Inicia a introdução específica de cada novo módulo conquistado
     function startIntroForModule(module) {
         introOverlay.style.display = "flex";
         introOverlay.style.opacity = "1";
-        btnStartGame.style.opacity = "0";
         introTitle.innerText = "NOVA HABILIDADE DESBLOQUEADA";
+        
+        // Esconde e desativa nativamente o botão para a nova fala
+        btnStartGame.style.opacity = "0";
+        btnStartGame.disabled = true;
         
         startTyping(module.intro, () => {
             btnStartGame.innerText = "ESTOU PRONTO!";
             btnStartGame.style.opacity = "1";
+            btnStartGame.disabled = false; // LIBERA o clique nativo aqui!
         });
     }
 
