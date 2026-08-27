@@ -528,9 +528,6 @@ body {
     gap: 20px;
 }
 
-/* Quando você tiver a imagem (spritesheet), basta trocar o background-image aqui.
-  Atualmente usa cores e emojis como placeholder.
-*/
 /* .robot-sprite {
     width: 120px;
     height: 120px;

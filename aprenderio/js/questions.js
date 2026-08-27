@@ -1,5 +1,4 @@
 // Banco de Questões - Aprender.IO (Versão VisuAlg 2.5)
-// Cada array interno representa uma "Etapa" (checkpoint), contendo um pool de no mínimo 5 questões.
 
 const bancoDeQuestoes = {
     // ==========================================
