@@ -285,8 +285,20 @@ document.addEventListener('DOMContentLoaded', () => {
         quizOverlay.style.display = 'flex';
     }
 
-    robotBtn.onclick = openQuiz;
+    // robotBtn.onclick = openQuiz;
+    // document.getElementById('close-quiz').onclick = () => quizOverlay.style.display = 'none';
+    
+    // // Inicia o Estado Inicial do Robô Guia
+    // initGlobalIntro();
+
+robotBtn.onclick = openQuiz;
     document.getElementById('close-quiz').onclick = () => quizOverlay.style.display = 'none';
+    
+    // Adiciona o evento de clique para o botão principal de início
+    btnStartGame.addEventListener('click', () => {
+        introOverlay.style.display = 'none';
+        updateMap(false); // Posiciona o robô corretamente no primeiro checkpoint do mapa
+    });
     
     // Inicia o Estado Inicial do Robô Guia
     initGlobalIntro();
